@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
   res.status(200).send(`API is running`);
 });
 
-app.use('/products', ProductRoutes);
+app.use('/api/products', ProductRoutes);
 
 app.listen(PORT, () => {
   console.clear();

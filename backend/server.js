@@ -2,7 +2,9 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import express from 'express';
 import chalk from 'chalk';
+import colors from 'colors';
 import { customAlphabet } from 'nanoid';
+import { notFound, errorHandler } from './middleware/ErrorMiddleware.js';
 import ProductRoutes from './routes/ProductRoutes.js';
 
 dotenv.config();
@@ -40,6 +42,10 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', ProductRoutes);
+
+app.use(notFound);
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.clear();

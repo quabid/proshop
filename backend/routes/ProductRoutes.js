@@ -22,15 +22,8 @@ router.get(
 router.get(
   '/:id',
   asyncHandler(async (req, res) => {
-    Product.findById(req.params.id)
-      .then(result => {
-        res.status(200).json(result);
-      })
-      .catch(err => {
-        res
-          .status(404)
-          .json({ error: `Product ID ${req.params.id} Not Found` });
-      });
+    const product = await Product.findById(req.params.id);
+    res.json(product);
   })
 );
 

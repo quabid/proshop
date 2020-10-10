@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Col,
   Row,
@@ -9,20 +10,20 @@ import {
   Button,
   ListGroupItem,
 } from 'react-bootstrap';
-import axios from 'axios';
+
 import Rating from '../components/Rating';
+import { listProductDetails } from '../actions/ProductActions';
 
 const ProductScreen = ({ match }) => {
-  const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
+
+  // @ts-ignore
+  const productDetails = useSelector(state => state.productDetails);
+  const { product } = productDetails;
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get(`/api/products/${match.params.id}`);
-      setProduct(data);
-    };
-
-    fetchProduct();
-  }, [match]);
+    dispatch(listProductDetails(match.params.id));
+  }, [dispatch, match]);
 
   return (
     <>

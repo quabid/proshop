@@ -5,9 +5,12 @@ dotenv.config();
 const app = express();
 const products = require('./data/products'); */
 import dotenv from 'dotenv';
+import connectDB from './config/db.js';
 import express from 'express';
 import chalk from 'chalk';
+
 dotenv.config();
+connectDB();
 import products from './data/products.js';
 const PORT = process.env.PORT || 5000;
 const app = express();

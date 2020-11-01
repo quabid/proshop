@@ -6,6 +6,7 @@ import colors from 'colors';
 import { customAlphabet } from 'nanoid';
 import { notFound, errorHandler } from './middleware/ErrorMiddleware.js';
 import ProductRoutes from './routes/ProductRoutes.js';
+import UserRoutes from './routes/UserRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -13,6 +14,7 @@ connectDB();
 const nanoid = customAlphabet('02468ouqtyminv', 13);
 const PORT = process.env.PORT || 5000;
 const app = express();
+app.use(express.json());
 app.use((req, res, next) => {
   res.type('json');
 
@@ -42,6 +44,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', ProductRoutes);
+app.use('/api/users', UserRoutes);
 
 app.use(notFound);
 
